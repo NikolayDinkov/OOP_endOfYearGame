@@ -3,7 +3,7 @@ package com.elsys;
 import java.util.TreeMap;
 
 public class Map {
-    TreeMap<Coordinates,GameObject> map = new TreeMap<>();
+    TreeMap<Coordinates,GameObject> map;
     final int max_X = 99;
     final int min_X = 0;
     final int max_Y = 99;
