@@ -4,7 +4,7 @@ public class Player implements GameObject{
     int max_health;
     int curr_health;
     int damage;
-    Player(int X, int Y){
+    Player(){
         this.max_health = 10;
         this.curr_health = this.max_health;
         this.damage = 3;
