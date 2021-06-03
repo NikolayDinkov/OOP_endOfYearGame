@@ -17,6 +17,7 @@ public class Player implements GameObject{
         }
         return 0;
     }
+
     int regen(int toBeRegenerated){
         if(curr_health == max_health){
             return -1;
@@ -27,6 +28,7 @@ public class Player implements GameObject{
         }
         return 0;
     }
+
     public int getCurr_health() {return curr_health;}
     public int getDamage() {return damage;}
     public void setDamage(int damage) {this.damage = damage;}
