@@ -3,6 +3,10 @@ package com.elsys;
 import java.util.*;
 
 public class Brimstone {
+
+    //Brimstone is the main weapon of the player
+    //It deal damage to all enemies in a particular direction
+
     enum Direction{
         LEFT,
         RIGHT,
@@ -21,9 +25,14 @@ public class Brimstone {
         this.range = range;
         this.dir = Direction.NONE;
     }
+
+    //Changes direction of the weapon
     void change_dir(Direction new_dir){
         this.dir = new_dir;
     }
+
+    //Shoot the Brimstone
+    //The function should be called after the function "change_dir"
     void shoot(Coordinates player_cord, TreeMap<Coordinates,GameObject> map){
         if(ACTIVE){
             if (dir == Direction.UP){
@@ -31,9 +40,9 @@ public class Brimstone {
                     int y = player_cord.getY();
                     player_cord.setY(y+=i);
                     if (map.get(player_cord) instanceof Enemy){
-                        ((Enemy) map.get(player_cord)).take_damage();
+                        ((Enemy) map.get(player_cord)).take_damage(this.damage);
                         if(((Enemy) map.get(player_cord)).is_dead()){
-                            map.remove(player_cord);
+                            map.replace(player_cord, new EmptySpace());
                         }
                     }
                 }
@@ -43,9 +52,9 @@ public class Brimstone {
                     int y = player_cord.getY();
                     player_cord.setY(y-=i);
                     if (map.get(player_cord) instanceof Enemy){
-                        ((Enemy) map.get(player_cord)).take_damage();
+                        ((Enemy) map.get(player_cord)).take_damage(this.damage);
                         if(((Enemy) map.get(player_cord)).is_dead()){
-                            map.remove(player_cord);
+                            map.replace(player_cord, new EmptySpace());
                         }
                     }
                 }
@@ -55,9 +64,9 @@ public class Brimstone {
                     int x = player_cord.getX();
                     player_cord.setX(x-=i);
                     if (map.get(player_cord) instanceof Enemy){
-                        ((Enemy) map.get(player_cord)).take_damage();
+                        ((Enemy) map.get(player_cord)).take_damage(this.damage);
                         if(((Enemy) map.get(player_cord)).is_dead()){
-                            map.remove(player_cord);
+                            map.replace(player_cord, new EmptySpace());
                         }
                     }
                 }
@@ -67,9 +76,9 @@ public class Brimstone {
                     int x = player_cord.getX();
                     player_cord.setX(x+=i);
                     if (map.get(player_cord) instanceof Enemy){
-                        ((Enemy) map.get(player_cord)).take_damage();
+                        ((Enemy) map.get(player_cord)).take_damage(this.damage);
                         if(((Enemy) map.get(player_cord)).is_dead()){
-                            map.remove(player_cord);
+                            map.replace(player_cord, new EmptySpace());
                         }
                     }
                 }
