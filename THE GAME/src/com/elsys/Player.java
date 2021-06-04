@@ -4,6 +4,7 @@ public class Player extends Entity{
     int curr_range;
     int max_range;
     int min_range;
+
     Player(){
         this.max_health = 10;
         this.curr_health = this.max_health;

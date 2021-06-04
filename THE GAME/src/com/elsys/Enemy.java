@@ -3,11 +3,8 @@ package com.elsys;
 import java.util.Random;
 import java.util.Set;
 
-public class Enemy implements GameObject{
+public class Enemy extends Entity{
 
-    int max_health;
-    int curr_health;
-    int damage;
     Coordinates enemy;
     Coordinates our_coords;
     int length_of_shoot;
