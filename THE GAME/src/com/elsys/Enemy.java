@@ -12,6 +12,7 @@ public class Enemy implements GameObject{
     Coordinates our_coords;
     int length_of_shoot;
     int timer_of_shoot;
+
     public Enemy(){
         Random rand = new Random();
         our_coords = new Coordinates(rand.nextInt(10) + 1, rand.nextInt(10) + 1);

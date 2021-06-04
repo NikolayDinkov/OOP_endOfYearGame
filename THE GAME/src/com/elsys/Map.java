@@ -15,6 +15,7 @@ public class Map {
         this.player = new Player();
     }
 
+
     void move_up(){
         if (player_coord.getY() < max_Y){
             map.replace(player_coord, new EmptySpace());
@@ -47,5 +48,7 @@ public class Map {
             map.replace(player_coord, player);
         }
     }
-
+    void shoot_up(){
+        int Y = player_coord.getY();
+    }
 }

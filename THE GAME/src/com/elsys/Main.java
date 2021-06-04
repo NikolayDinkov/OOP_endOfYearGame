@@ -1,13 +1,11 @@
 package com.elsys;
 
-import javax.swing.*;
-
 public class Main {
 
-    public static void main(String[] argv) throws Exception {
+    public static void main(String[] argv){
 
         Map map = new Map();
-
+        //to-do
 //        JTextField textField = new JTextField();
 //        textField.addKeyListener(new MKeyListener(map));
 //        JFrame jframe = new JFrame();
