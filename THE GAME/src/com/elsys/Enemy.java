@@ -15,16 +15,24 @@ public class Enemy extends Entity implements GameObject{
     String last_direction;
     Map the_map;
 
+    public Enemy(){
+        this.max_health = 9;
+        this.curr_health = this.max_health;
+        this.damage = 2;
+        this.length_of_shoot = 2;
+        spawn();
+    }
+
     private boolean is_it_in_hole(){
         for(int x = our_coords.getX() - 1; x < our_coords.getX() + 1; x++){
             for(int y = our_coords.getY()-1; y < our_coords.getY()+1; y++){
                 Coordinates curr = new Coordinates(x, y);
                 if(the_map.map.get(curr) instanceof EmptySpace){
-                    return true;
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
     private void getStartCoords(){
@@ -41,7 +49,7 @@ public class Enemy extends Entity implements GameObject{
         }
     }
 
-    private void spawn(){
+    void spawn(){
         getStartCoords();
         the_map.map.replace(our_coords, this);
     }
@@ -69,14 +77,6 @@ public class Enemy extends Entity implements GameObject{
             case 8 -> last_direction = "upper right";
             default -> System.out.printf("%s\n", "You are in a hole!");
         }
-    }
-
-    public Enemy(){
-        this.max_health = 9;
-        this.curr_health = this.max_health;
-        this.damage = 2;
-        this.length_of_shoot = 2;
-        spawn();
     }
 
     private void get_the_Coordinates_of_Player() {
