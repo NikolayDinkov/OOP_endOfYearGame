@@ -10,6 +10,7 @@ public class Map {
     final int min_Y = 0;
     Player player;
     Brimstone brimstone;
+    boolean GameEnded = false;
 
     Map() throws Exception {
         this.player = new Player(new Coordinates(1, 1));
@@ -25,43 +26,27 @@ public class Map {
     }
 
     void move_up() {
-        if (player.getPlayer_coord().getY() < max_Y){
-            if(player.isFlight() || map.get(new Coordinates(player.getPlayer_coord().getX(),player.getPlayer_coord().getY() + 1)) instanceof EmptySpace){
-                map.replace(player.getPlayer_coord(), new EmptySpace());
-                int Y = player.getPlayer_coord().getY();
-                player.getPlayer_coord().setY(++Y);
-                map.replace(player.getPlayer_coord(), player);
-            }
+        if (player.getPlayer_coord_Y() < max_Y){
+            Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() + 1);
+            player.move(new_coords, map);
         }
     }
     void move_down(){
-        if (player.getPlayer_coord().getY() > min_Y){
-            if(player.isFlight() || map.get(new Coordinates(player.getPlayer_coord().getX(),player.getPlayer_coord().getY() - 1)) instanceof EmptySpace){
-                map.replace(player.getPlayer_coord(), new EmptySpace());
-                int Y = player.getPlayer_coord().getY();
-                player.getPlayer_coord().setY(--Y);
-                map.replace(player.getPlayer_coord(), player);
-            }
+        if (player.getPlayer_coord_Y() > min_Y){
+            Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() - 1);
+            player.move(new_coords, map);
         }
     }
     void move_left(){
-        if (player.getPlayer_coord().getX() > min_X){
-            if(player.isFlight() || map.get(new Coordinates(player.getPlayer_coord().getX() - 1,player.getPlayer_coord().getY())) instanceof EmptySpace) {
-                map.replace(player.getPlayer_coord(), new EmptySpace());
-                int X = player.getPlayer_coord().getX();
-                player.getPlayer_coord().setX(--X);
-                map.replace(player.getPlayer_coord(), player);
-            }
+        if (player.getPlayer_coord_X() > min_X){
+            Coordinates new_coords = new Coordinates(player.getPlayer_coord_X() - 1,player.getPlayer_coord().getY());
+            player.move(new_coords, map);
         }
     }
     void move_right(){
-        if (player.getPlayer_coord().getY() < max_X){
-            if(player.isFlight() || map.get(new Coordinates(player.getPlayer_coord().getX() + 1,player.getPlayer_coord().getY())) instanceof EmptySpace) {
-                map.replace(player.getPlayer_coord(), new EmptySpace());
-                int X = player.getPlayer_coord().getX();
-                player.getPlayer_coord().setX(++X);
-                map.replace(player.getPlayer_coord(), player);
-            }
+        if (player.getPlayer_coord_Y() < max_X){
+            Coordinates new_coords = new Coordinates(player.getPlayer_coord_X() + 1,player.getPlayer_coord().getY());
+            player.move(new_coords, map);
         }
     }
     void shot_up(){
@@ -80,7 +65,6 @@ public class Map {
         brimstone.change_dir(Brimstone.Direction.RIGHT);
         brimstone.shoot(player.getPlayer_coord(), map);
     }
-
 //    Entity getFromMapBy_XY() {
 //        return map.
 //    }

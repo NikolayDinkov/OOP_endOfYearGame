@@ -21,7 +21,7 @@ class MKeyListener extends KeyAdapter {
             case KeyEvent.VK_S: map.move_down();break;
             case KeyEvent.VK_W: map.move_up();break;
             case KeyEvent.VK_D: map.move_right();break;
-
+            case KeyEvent.VK_E: map.player.use_bomb(map);
         }
     }
 }
