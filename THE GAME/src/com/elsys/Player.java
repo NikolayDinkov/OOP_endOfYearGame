@@ -19,7 +19,7 @@ public class Player extends Entity{
         this.curr_range = 2;
         this.min_range = 1;
         this.player_coord = player_coord;
-        this.bomb = new Bomb("Za6to bombite trebva da ima imena edin gospod znae", 5);
+        this.bomb = new Bomb("Za6to bombite trebva da imat imena edin gospod znae", 5);
     }
 
     int regen(int toBeRegenerated){//regen serten amount of health
@@ -108,7 +108,6 @@ public class Player extends Entity{
     public int getAmountKeys() {
         return keys;
     }
-
     public int getPlayer_coord_X(){
         return player_coord.getX();
     }

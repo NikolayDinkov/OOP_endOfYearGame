@@ -10,9 +10,9 @@ public class Map {
     final int min_Y = 0;
     Player player;
     Brimstone brimstone;
-    boolean GameEnded = false;
+    //boolean GameEnded = false;
 
-    Map() throws Exception {
+    Map() {
         this.player = new Player(new Coordinates(1, 1));
         brimstone = new Brimstone(player.getPlayer_coord(), player.getDamage(), player.getRange());
 //        map.put(player.getPlayer_coord(), player);
