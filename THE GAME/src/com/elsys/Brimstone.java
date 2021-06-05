@@ -14,13 +14,11 @@ public class Brimstone {
         DOWN,
         NONE
     }
-    int damage;
-    int range;
-    boolean ACTIVE;
-    Direction dir;
+    private int damage;
+    private int range;
+    private Direction dir;
 
     Brimstone(Coordinates player_cord, int damage,int range){
-        this.ACTIVE = false;
         this.damage = damage;
         this.range = range;
         this.dir = Direction.NONE;
@@ -34,58 +32,32 @@ public class Brimstone {
     //Shoot the Brimstone
     //The function should be called after the function "change_dir"
     void shoot(Coordinates player_cord, TreeMap<Coordinates,GameObject> map){
-        if(ACTIVE){
+            ArrayList<Coordinates> coord = new ArrayList<>();
             if (dir == Direction.UP){
                 for (int i = 1; i <= this.range; i++){
-                    int y = player_cord.getY();
-                    player_cord.setY(y+=i);
-                    if (map.get(player_cord) instanceof Enemy){
-                        ((Enemy) map.get(player_cord)).take_damage(this.damage);
-                        if(((Enemy) map.get(player_cord)).is_dead()){
-                            map.replace(player_cord, new EmptySpace());
-                        }
-                    }
+                    coord.add(new Coordinates(player_cord.getX(),player_cord.getY() + i));
                 }
             }
             else if (dir == Direction.DOWN){
                 for (int i = 1; i <= this.range; i++){
-                    int y = player_cord.getY();
-                    player_cord.setY(y-=i);
-                    if (map.get(player_cord) instanceof Enemy){
-                        ((Enemy) map.get(player_cord)).take_damage(this.damage);
-                        if(((Enemy) map.get(player_cord)).is_dead()){
-                            map.replace(player_cord, new EmptySpace());
-                        }
-                    }
+                    coord.add(new Coordinates(player_cord.getX(), player_cord.getY() - i));
                 }
             }
             else if (dir == Direction.LEFT){
                 for (int i = 1; i <= this.range; i++){
-                    int x = player_cord.getX();
-                    player_cord.setX(x-=i);
-                    if (map.get(player_cord) instanceof Enemy){
-                        ((Enemy) map.get(player_cord)).take_damage(this.damage);
-                        if(((Enemy) map.get(player_cord)).is_dead()){
-                            map.replace(player_cord, new EmptySpace());
-                        }
-                    }
+                    coord.add(new Coordinates(player_cord.getX() - i, player_cord.getY()));
                 }
             }
             else if (dir == Direction.RIGHT){
                 for (int i = 1; i <= this.range; i++){
-                    int x = player_cord.getX();
-                    player_cord.setX(x+=i);
-                    if (map.get(player_cord) instanceof Enemy){
-                        ((Enemy) map.get(player_cord)).take_damage(this.damage);
-                        if(((Enemy) map.get(player_cord)).is_dead()){
-                            map.replace(player_cord, new EmptySpace());
-                        }
-                    }
+                    coord.add(new Coordinates(player_cord.getX() + i, player_cord.getY()));
                 }
             }
-        }
+            coord.stream()
+                    .filter(val -> map.get(val) instanceof Enemy)
+                    .peek(val -> ((Enemy) map.get(val)).take_damage(this.damage))
+                    .filter(val -> ((Enemy) map.get(val)).is_dead())
+                    .forEach(val -> map.replace(val, new EmptySpace()));
     }
 
-    public boolean isACTIVE() {return ACTIVE;}
-    public void setACTIVE(boolean ACTIVE) {this.ACTIVE = ACTIVE;}
 }

@@ -1,19 +1,18 @@
 package com.elsys;
 
 public class Player extends Entity{
-    int curr_range;
-    int max_range;
-    int min_range;
 
-    Player(){
+    private Coordinates player_coord;
+
+    Player(Coordinates player_coord){
         this.max_health = 10;
         this.curr_health = this.max_health;
         this.damage = 3;
         this.max_range = 6;
         this.curr_range = 2;
         this.min_range = 1;
+        this.player_coord = player_coord;
     }
-
 
     int regen(int toBeRegenerated){//regen serten amount of health
         if(curr_health == max_health){
@@ -41,8 +40,20 @@ public class Player extends Entity{
         return 0;
     }
 
-    public int getCurr_range() {return curr_range;}
-    public int getCurr_health() {return curr_health;}
-    public int getDamage() {return damage;}
-    public void setDamage(int damage) {this.damage = damage;}
+    public Coordinates getPlayer_coord() {
+        return player_coord;
+    }
+    public void setPlayer_coord(Coordinates player_coord) {
+        this.player_coord = player_coord;
+    }
+
+    public boolean isFlight() {
+        return flight;
+    }
+    public void activateFlight() {
+        this.flight = true;
+    }
+    public void deactivateFlight() {
+        this.flight = false;
+    }
 }

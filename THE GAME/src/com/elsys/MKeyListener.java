@@ -10,20 +10,18 @@ class MKeyListener extends KeyAdapter {
     }
     @Override
     public void keyPressed(KeyEvent event) {
+
         int code = event.getKeyCode();
-        System.out.println("Code: " + code);
-        if(code == 37){
-            map.move_left();
+        switch (code){
+            case KeyEvent.VK_UP: map.shot_up();break;
+            case KeyEvent.VK_DOWN: map.shot_down();break;
+            case KeyEvent.VK_LEFT: map.shot_left();break;
+            case KeyEvent.VK_RIGHT: map.shot_right();break;
+            case KeyEvent.VK_A: map.move_left();break;
+            case KeyEvent.VK_S: map.move_down();break;
+            case KeyEvent.VK_W: map.move_up();break;
+            case KeyEvent.VK_D: map.move_right();break;
+
         }
-        else if(code == 38){
-            map.move_up();
-        }
-        else if(code == 39){
-            map.move_right();
-        }
-        else if(code == 40){
-            map.move_down();
-        }
-        //to-do
     }
 }

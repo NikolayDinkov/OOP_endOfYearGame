@@ -4,14 +4,17 @@ public class Main {
 
     public static void main(String[] argv){
 
-        Map map = new Map();
-        //to-do
-//        JTextField textField = new JTextField();
-//        textField.addKeyListener(new MKeyListener(map));
-//        JFrame jframe = new JFrame();
-//        jframe.add(textField);
-//        jframe.setSize(400, 350);
-//        jframe.setVisible(true);
-
+        try {
+            Map map = new Map();
+            //to-do
+//          JTextField textField = new JTextField();
+//          textField.addKeyListener(new MKeyListener(map));
+//          JFrame jframe = new JFrame();
+//          jframe.add(textField);
+//          jframe.setSize(400, 350);
+//          jframe.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
