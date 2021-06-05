@@ -1,9 +1,12 @@
 package com.elsys;
 
+import javax.swing.*;
+
 public class Player extends Entity{
 
     private Coordinates player_coord;
-
+    private int bombs = 1;
+    private int keys = 0;
     Player(Coordinates player_coord){
         this.max_health = 10;
         this.curr_health = this.max_health;
@@ -55,5 +58,19 @@ public class Player extends Entity{
     }
     public void deactivateFlight() {
         this.flight = false;
+    }
+    public void pick_up_item(Item item){
+        if(item instanceof Bomb){
+            bombs++;
+        }
+        if (item instanceof KEYS){
+            keys++;
+        }
+    }
+    public int getBombs() {
+        return bombs;
+    }
+    public int getKeys() {
+        return keys;
     }
 }
