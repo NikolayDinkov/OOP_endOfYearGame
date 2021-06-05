@@ -15,6 +15,8 @@ public class Coordinates implements Comparable {
         this.Y = y;
     }
 
+    Coordinates(){}
+
     public int getX() {return X;}
     public void setX(int x){
         if (x >= 0 || x <= 99){

@@ -1,8 +1,12 @@
 package com.elsys;
 
-import javax.swing.*;
+import java.util.ArrayList;
 
 public class Player extends Entity{
+
+    ArrayList<Item> inventory = new ArrayList<>();
+    private int inv_size;
+
 
     private Coordinates player_coord;
     private int bombs = 1;
@@ -15,6 +19,7 @@ public class Player extends Entity{
         this.curr_range = 2;
         this.min_range = 1;
         this.player_coord = player_coord;
+        this.inv_size = 8;
     }
 
     int regen(int toBeRegenerated){//regen serten amount of health
@@ -72,5 +77,11 @@ public class Player extends Entity{
     }
     public int getKeys() {
         return keys;
+    }
+    public int getPlayer_coord_X(){
+        return player_coord.getX();
+    }
+    public int getPlayer_coord_Y(){
+        return player_coord.getY();
     }
 }

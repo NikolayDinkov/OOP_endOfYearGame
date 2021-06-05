@@ -9,7 +9,7 @@ public class Arrow extends Item implements Usable {
     }
 
     @Override
-    public void use(Player player) {
+    public void use(Entity player, Map map) {
 
     }
 }

@@ -80,4 +80,8 @@ public class Map {
         brimstone.change_dir(Brimstone.Direction.RIGHT);
         brimstone.shoot(player.getPlayer_coord(), map);
     }
+
+//    Entity getFromMapBy_XY() {
+//        return map.
+//    }
 }
