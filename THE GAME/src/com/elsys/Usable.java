@@ -1,5 +1,5 @@
 package com.elsys;
 
 public interface Usable {
-    void use(Player player);
+    void use(Entity player, Map map);
 }

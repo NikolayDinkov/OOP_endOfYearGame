@@ -1,8 +1,12 @@
 package com.elsys;
 
+import java.util.ArrayList;
+
 public class Player extends Entity{
 
-    private Coordinates player_coord;
+    ArrayList<Item> inventory = new ArrayList<>();
+    private int inv_size;
+
 
     Player(Coordinates player_coord){
         this.max_health = 10;
@@ -12,6 +16,7 @@ public class Player extends Entity{
         this.curr_range = 2;
         this.min_range = 1;
         this.player_coord = player_coord;
+        this.inv_size = 8;
     }
 
     int regen(int toBeRegenerated){//regen serten amount of health
@@ -40,6 +45,10 @@ public class Player extends Entity{
         return 0;
     }
 
+    void pick() {
+        //
+    }
+
     public Coordinates getPlayer_coord() {
         return player_coord;
     }
@@ -55,5 +64,11 @@ public class Player extends Entity{
     }
     public void deactivateFlight() {
         this.flight = false;
+    }
+    public int getPlayer_coord_X(){
+        return player_coord.getX();
+    }
+    public int getPlayer_coord_Y(){
+        return player_coord.getY();
     }
 }

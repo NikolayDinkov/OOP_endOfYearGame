@@ -9,6 +9,8 @@ public class Entity implements GameObject{
     protected int min_range;
     protected boolean flight = false;
 
+    protected Coordinates player_coord;
+
     void take_damage(int damage_to_be_taken){
         curr_health -= damage_to_be_taken;
         if (curr_health < 0){

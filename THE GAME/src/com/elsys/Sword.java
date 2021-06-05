@@ -9,7 +9,7 @@ public class Sword extends Item implements Usable, Weapon{
     }
 
     @Override
-    public void use(Player player) {
+    public void use(Entity player, Map map) {
 
     }
 }
