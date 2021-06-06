@@ -42,7 +42,7 @@ public class THE_Map {
     void generate(){
         map.put(player.getPlayer_coord(), player);
         Coordinates[] enemy_cords = new Coordinates[3];
-        for(int i = 0;i < 3;i++){
+        for(int i = 0; i < 3; i++){
             Coordinates c = randomSpawnLocation(50, 50);
             int k = 0;
             for(Coordinates curr : map.keySet()){
