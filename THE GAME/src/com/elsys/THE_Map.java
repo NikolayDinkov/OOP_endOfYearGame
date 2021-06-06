@@ -111,15 +111,38 @@ public class THE_Map {
 
     void convert() {
         TreeMap<Coordinates, GameObject> map_vision = this.getVisibleMap();
-        for(Map.Entry<Coordinates, GameObject> entry : map.entrySet()){
-            System.out.printf("%d %d", entry.getKey().getX(), entry.getKey().getY());
+        int i = 0, j = 0;
+        for(Map.Entry<Coordinates, GameObject> entry : map_vision.entrySet()){
+//            System.out.printf("x: %d, y: %d\n", entry.getKey().getX(), entry.getKey().getY());
+            while(i < 21){
+                while(j < 21){
+                    if(entry.getValue() instanceof Rock) {
+                        this.vision[i][j] = '∎';
+                    } else if (entry.getValue() instanceof Player) {
+                        this.vision[i][j] = 'p';
+                    } else if (entry.getValue() instanceof Enemy) {
+                        this.vision[i][j] = 'e';
+                    } else if(entry.getValue() instanceof Boss) {
+                        this.vision[i][j] = 'b';
+                    } else if(entry.getValue() instanceof Key) {
+                        this.vision[i][j] = 'k';
+                    } else if(entry.getValue() instanceof EndHole) {
+                        this.vision[i][j] = '⊙';
+                    } else if(entry.getValue() instanceof Rock_Wall) {
+                        this.vision[i][j] = '⌂';
+                    }
+                    j++;
+                }
+                i++;
+                j = 0;
+            }
         }
     }
 
     void printVision() {
         System.out.print("Characters:\n - e = enemy\n - B = boss\n - p = player\n - k = key\n - ∎ = rock\n - ⊙ = end hole\n");
         for(int i = 0; i < 21; i++) {
-            for (int j = 0; i < 21; j++){
+            for (int j = 0; j < 21; j++){
                 System.out.printf("%c", this.vision[i][j]);
             }
             System.out.print("\n");

@@ -10,6 +10,9 @@ public class Main {
             THE_Map map = new THE_Map();
             map.generate();
             System.out.println(map.getVisibleMap());
+            map.convert();
+//            System.out.println(map.convert());
+            map.printVision();
         } catch (Exception e) {
             e.printStackTrace();
         }
