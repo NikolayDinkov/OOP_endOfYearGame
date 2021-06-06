@@ -11,6 +11,6 @@ public class PowerPill extends Pills {
 
     @Override
     public void consume(Player player) {
-
+//        player.
     }
 }

@@ -11,6 +11,6 @@ public class MaxHealthPIll extends Pills {
 
     @Override
     public void consume(Player player) {
-
+        player.setMax_health(player.getMax_health() + bonus_health);
     }
 }

@@ -19,7 +19,7 @@ public class Player extends Entity{
         this.curr_range = 2;
         this.min_range = 1;
         this.player_coord = player_coord;
-        this.bomb = new Bomb("Za6to bombite trebva da imat imena edin gospod znae", 5);
+        this.bomb = new Bomb(5);
     }
 
     int regen(int toBeRegenerated){//regen serten amount of health
@@ -95,7 +95,7 @@ public class Player extends Entity{
         if (item instanceof Key){
             keys++;
         }
-        
+
     }
     public void use_bomb(THE_Map map){
         if(this.bombs > 0){
@@ -115,6 +115,7 @@ public class Player extends Entity{
     public int getPlayer_coord_Y(){
         return player_coord.getY();
     }
+
     @Override
     public String toString(){
         return "Player";

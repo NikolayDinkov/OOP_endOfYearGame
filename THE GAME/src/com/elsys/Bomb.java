@@ -7,8 +7,8 @@ public class Bomb extends Item implements Usable{
     int dropped_at_X;
     int dropped_at_Y;
 
-    Bomb(String name, int toMonsterDMG) {
-        super(name, true);
+    Bomb(int toMonsterDMG) {
+        super("Bomb", true);
         this.toMonsterDMG = toMonsterDMG;
     }
 

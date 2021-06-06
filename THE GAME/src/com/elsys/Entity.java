@@ -19,8 +19,11 @@ public class Entity implements GameObject{
         return curr_health == 0;
     }
     public int getCurr_health() {return curr_health;}
+    public int getMax_health() {return max_health;}
     public int getDamage() {return damage;}
     public void setDamage(int damage) {this.damage = damage;}
+    public void setCurr_health(int regen) {this.curr_health = regen;}
+    public void setMax_health(int max_health) {this.max_health = max_health;}
     public int getRange() {
         return curr_range;
     }
