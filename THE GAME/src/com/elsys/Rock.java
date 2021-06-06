@@ -1,9 +1,9 @@
 package com.elsys;
 
-public class Rock extends Item implements GameObject{
+public class Rock implements GameObject{
 
     Rock() {
-        super("Rock", true);
+
     }
     @Override
     public String toString(){
