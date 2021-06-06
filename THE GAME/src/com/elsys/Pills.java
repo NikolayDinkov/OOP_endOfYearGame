@@ -1,12 +1,12 @@
 package com.elsys;
 
-public class Pills extends Item{
+public abstract class Pills extends Item{
     int power;
-    int efficient;
+    int bad_effect;
 
-    Pills(String name, int power, int efficient) {
+    Pills(String name, int power, int bad_effect) {
         super(name, false);
         this.power = power;
-        this.efficient = efficient;
+        this.bad_effect = bad_effect;
     }
 }

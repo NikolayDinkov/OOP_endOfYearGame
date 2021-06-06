@@ -113,7 +113,8 @@ public class THE_Map {
         TreeMap<Coordinates, GameObject> map_vision = this.getVisibleMap();
         int i = 0, j = 0;
         for(Map.Entry<Coordinates, GameObject> entry : map_vision.entrySet()){
-//            System.out.printf("x: %d, y: %d\n", entry.getKey().getX(), entry.getKey().getY());
+////            System.out.printf("x: %d, y: %d\n", entry.getKey().getX(), entry.getKey().getY());
+//            System.out.println(entry.getKey().getX() + " " + entry.getKey().getY());
             while(i < 21){
                 while(j < 21){
                     if(entry.getValue() instanceof Rock) {
