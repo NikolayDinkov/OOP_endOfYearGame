@@ -15,7 +15,7 @@ public class THE_Map {
     char[][] vision;
     //boolean GameEnded = false;
     THE_Map() {
-        this.player = new Player(new Coordinates(1, 1));
+        this.player = new Player(new Coordinates(50, 50));
         brimstone = new Brimstone(player.getPlayer_coord(), player.getDamage(), player.getRange());
         vision = new char[21][21];
 //        map.put(player.getPlayer_coord(), player);
@@ -120,16 +120,18 @@ public class THE_Map {
                         this.vision[i][j] = '∎';
                     } else if (entry.getValue() instanceof Player) {
                         this.vision[i][j] = 'p';
-                    } else if (entry.getValue() instanceof Enemy) {
-                        this.vision[i][j] = 'e';
-                    } else if(entry.getValue() instanceof Boss) {
+                    } else if (entry.getValue() instanceof Boss) {
                         this.vision[i][j] = 'b';
+                    } else if(entry.getValue() instanceof Enemy) {
+                        this.vision[i][j] = 'e';
                     } else if(entry.getValue() instanceof Key) {
                         this.vision[i][j] = 'k';
                     } else if(entry.getValue() instanceof EndHole) {
                         this.vision[i][j] = '⊙';
                     } else if(entry.getValue() instanceof Rock_Wall) {
                         this.vision[i][j] = '⌂';
+                    } else if(entry.getValue() instanceof EmptySpace) {
+                        this.vision[i][j] = '.';
                     }
                     j++;
                 }
