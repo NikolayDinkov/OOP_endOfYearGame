@@ -2,8 +2,8 @@ package com.elsys;
 
 public class Key extends Item implements Equippable, GameObject{
 
-    Key(String name) {
-        super(name, false);
+    Key() {
+        super("Key", false);
     }
 
     @Override

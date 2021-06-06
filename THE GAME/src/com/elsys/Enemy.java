@@ -279,7 +279,7 @@ public class Enemy extends Entity implements GameObject{
     private void death(){
         for(Coordinates curr : the_map.map.keySet()){
             if(curr.equals(our_coords)){
-                the_map.map.replace(curr, new Key("Key"));
+                the_map.map.replace(curr, new Key());
                 break;
             }
         }

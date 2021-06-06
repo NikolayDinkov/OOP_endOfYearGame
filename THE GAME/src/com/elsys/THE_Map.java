@@ -78,12 +78,12 @@ public class THE_Map {
             }
         }
         for(int i = min_X;i <= max_X;i++){
-            map.put(new Coordinates(i, min_Y), new Rock_Wall("rock"));
-            map.put(new Coordinates(i, max_Y), new Rock_Wall("rock"));
+            map.put(new Coordinates(i, min_Y), new Rock_Wall());
+            map.put(new Coordinates(i, max_Y), new Rock_Wall());
         }
         for(int i = min_Y+1;i <= max_Y-1;i++){
-            map.put(new Coordinates(min_X, i), new Rock_Wall("rock"));
-            map.put(new Coordinates(min_X, i), new Rock_Wall("rock"));
+            map.put(new Coordinates(min_X, i), new Rock_Wall());
+            map.put(new Coordinates(min_X, i), new Rock_Wall());
         }
     }
 
