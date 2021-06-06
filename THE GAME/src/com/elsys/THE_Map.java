@@ -139,7 +139,7 @@ public class THE_Map {
                 j = 0;
                 i++;
             }
-            System.out.println(entry.getValue());
+//            System.out.println(entry.getValue());
             if(entry.getValue() instanceof Rock) {
                 this.vision[i][j] = '∎';
             } else if (entry.getValue() instanceof Player) {
@@ -167,13 +167,15 @@ public class THE_Map {
     }
 
     void printVision() {
-        System.out.print("Characters:\n - e = enemy\n - B = boss\n - p = player\n - k = key\n - ∎ = rock\n - ⊙ = end hole\n");
+
+//        System.out.print("Characters:\n - e = enemy\n - B = boss\n - p = player\n - k = key\n - ∎ = rock\n - ⊙ = end hole\n");
         for(int i = 0; i < 21; i++) {
             for (int j = 0; j < 21; j++){
-                System.out.printf("%c", this.vision[i][j]);
+                System.out.printf("%c ", this.vision[i][j]);
             }
             System.out.print("\n");
         }
+        System.out.print("\n\n");
     }
 
     void move_up() {
@@ -181,6 +183,8 @@ public class THE_Map {
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() + 1);
             player.move(new_coords, map);
         }
+        convert();
+        printVision();
     }
     void move_down(){
         if (player.getPlayer_coord_Y() > min_Y){
