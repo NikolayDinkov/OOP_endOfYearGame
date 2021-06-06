@@ -58,4 +58,7 @@ public class Brimstone {
                     .forEach(val -> map.replace(val, new EmptySpace()));
     }
 
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 }
