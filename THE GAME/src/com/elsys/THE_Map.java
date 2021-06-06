@@ -2,7 +2,9 @@ package com.elsys;
 
 import java.security.SecureRandom;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class THE_Map {
     TreeMap<Coordinates,GameObject> map = new TreeMap<>();
@@ -86,21 +88,40 @@ public class THE_Map {
     }
 
     TreeMap<Coordinates, GameObject> getVisibleMap(){
-        TreeMap<Coordinates, GameObject> visibleMap = new TreeMap<>();
+        TreeMap<Coordinates, GameObject> visibleMap = new TreeMap<Coordinates, GameObject>();
         int min_x = 0, min_y = 0, max_x = 99, max_y = 99;
-        if(player.getPlayer_coord_X() < 10){min_x = 0; max_x = 21;}
-        else if(player.getPlayer_coord_X() > 78){min_x = 78; max_x = 99;}
-        else {min_x = player.getPlayer_coord_X() - 10; max_x = player.getPlayer_coord_X() + 10;}
+        if(player.getPlayer_coord_X() < 10){
+            min_x = 0;
+            max_x = 21;
+        }
+        else if(player.getPlayer_coord_X() > 78){
+            min_x = 78;
+            max_x = 99;
+        }
+        else {
+            min_x = player.getPlayer_coord_X() - 10;
+            max_x = player.getPlayer_coord_X() + 10;
+        }
 
-        if(player.getPlayer_coord_Y() < 10){min_y = 0; max_y = 21;}
-        else if(player.getPlayer_coord_Y() > 78){min_y = 78; max_y = 99;}
-        else {min_y = player.getPlayer_coord_Y() - 10; max_y = player.getPlayer_coord_Y() + 10;}
+        if(player.getPlayer_coord_Y() < 10){
+            min_y = 0;
+            max_y = 21;
+        }
+        else if(player.getPlayer_coord_Y() > 78){
+            min_y = 78;
+            max_y = 99;
+        }
+        else {
+            min_y = player.getPlayer_coord_Y() - 10;
+            max_y = player.getPlayer_coord_Y() + 10;
+        }
         for(int i = min_x;i <= max_x;i++){
             for(int j = min_y;j <= max_y;j++){
                 Coordinates c = new Coordinates(i, j);
-                for(Coordinates curr : map.keySet()){
-                    if(curr.equals(c)) {
-                        visibleMap.put(new Coordinates(i, j), map.ceilingEntry(curr).getValue());
+                for(Map.Entry<Coordinates, GameObject> entry: map.entrySet()){
+                    if(entry.getKey().equals(c)) {
+                        //System.out.println(entry.getKey() + " " + entry.getValue());
+                        visibleMap.put(entry.getKey(), entry.getValue());
                         break;
                     }
                 }
@@ -117,6 +138,7 @@ public class THE_Map {
 //            System.out.println(entry.getKey().getX() + " " + entry.getKey().getY());
             while(i < 21){
                 while(j < 21){
+                    System.out.println(entry.getValue());
                     if(entry.getValue() instanceof Rock) {
                         this.vision[i][j] = '∎';
                     } else if (entry.getValue() instanceof Player) {
