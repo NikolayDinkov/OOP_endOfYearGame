@@ -61,19 +61,16 @@ public class THE_Map {
         this.player.setPlayer_coord(new Coordinates(50, 50));
         map.put(player.getPlayer_coord(), player);
         for(int i = min_X+1;i <= max_X-1;i++){
-            int k = 0;
-            for(int j = min_Y+1; j <= max_Y-1;j++){
+            for(int j = min_Y+2; j <= max_Y-2;j++){
                 Coordinates c = new Coordinates(i, j);
                 for(int t = 0;t < 3;t++){
                     if(c.equals(enemy_cords[t])){
-                        k = 1;
                         break;
                     }
                 }
                 if(c.equals(player.getPlayer_coord())){
-                    k = 1;
+                    continue;
                 }
-                if(k == 1)continue;
                 this.map.put(c, new EmptySpace());
             }
         }
