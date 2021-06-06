@@ -198,7 +198,7 @@ public class THE_Map {
         if (player.getPlayer_coord_Y() < max_Y){
             player.setPlayer_coord(new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() + 1));
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y());
-            this.map = player.move(new_coords, map);
+            player.move(new_coords, map);
         }
         convert();
         printVision();
@@ -207,7 +207,7 @@ public class THE_Map {
         if (player.getPlayer_coord_Y() > min_Y){
             player.setPlayer_coord(new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() - 1));
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y());
-            this.map = player.move(new_coords, map);
+            player.move(new_coords, map);
         }
         convert();
         printVision();
@@ -216,7 +216,7 @@ public class THE_Map {
         if (player.getPlayer_coord_X() > min_X){
             player.setPlayer_coord(new Coordinates(player.getPlayer_coord_X() - 1,player.getPlayer_coord_Y()));
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X() - 1,player.getPlayer_coord().getY());
-            this.map = player.move(new_coords, map);
+            player.move(new_coords, map);
         }
         convert();
         printVision();
@@ -225,7 +225,7 @@ public class THE_Map {
         if (player.getPlayer_coord_Y() < max_X){
             player.setPlayer_coord(new Coordinates(player.getPlayer_coord_X() + 1,player.getPlayer_coord_Y()));
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X() + 1,player.getPlayer_coord().getY());
-            this.map = player.move(new_coords, map);
+            player.move(new_coords, map);
         }
         convert();
         printVision();
