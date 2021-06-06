@@ -20,6 +20,7 @@ public class Enemy extends Entity implements GameObject{
         this.curr_health = this.max_health;
         this.damage = 2;
         this.length_of_shoot = 2;
+        this.the_map = new Map();
         spawn();
     }
 

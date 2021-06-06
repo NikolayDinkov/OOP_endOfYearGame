@@ -47,4 +47,8 @@ public class Coordinates implements Comparable {
                 ", Y=" + Y +
                 '}';
     }
+    @Override
+    public boolean equals(Object o){
+        return ((Coordinates) o).getX() == this.X && ((Coordinates) o).getY() == this.Y;
+    }
 }
