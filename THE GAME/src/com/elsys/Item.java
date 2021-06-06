@@ -1,6 +1,6 @@
 package com.elsys;
 
-public abstract class Item {
+public abstract class Item implements GameObject{
     protected final String name;
     protected boolean picked;
     protected boolean collision;
