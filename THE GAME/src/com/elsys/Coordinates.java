@@ -49,6 +49,7 @@ public class Coordinates implements Comparable {
     }
     @Override
     public boolean equals(Object o){
+        if(o.getClass() != this.getClass())return false;
         return ((Coordinates) o).getX() == this.X && ((Coordinates) o).getY() == this.Y;
     }
 }

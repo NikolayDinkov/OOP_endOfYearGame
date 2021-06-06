@@ -56,26 +56,29 @@ public class Map {
         this.player.setPlayer_coord(new Coordinates(50, 50));
         map.put(player.getPlayer_coord(), player);
         for(int i = min_X+1;i <= max_X-1;i++){
+            int k = 0;
             for(int j = min_Y+1; j <= max_Y-1;j++){
                 Coordinates c = new Coordinates(i, j);
                 for(int t = 0;t < 3;t++){
                     if(c.equals(enemy_cords[t])){
-                        continue;
+                        k = 1;
+                        break;
                     }
                 }
                 if(c.equals(player.getPlayer_coord())){
-                    continue;
+                    k = 1;
                 }
+                if(k == 1)continue;
                 this.map.put(c, new EmptySpace());
             }
         }
         for(int i = min_X;i <= max_X;i++){
-            map.put(new Coordinates(i, min_Y), new Rock("rock"));
-            map.put(new Coordinates(i, max_Y), new Rock("rock"));
+            map.put(new Coordinates(i, min_Y), new Rock_Wall("rock"));
+            map.put(new Coordinates(i, max_Y), new Rock_Wall("rock"));
         }
         for(int i = min_Y+1;i <= max_Y-1;i++){
-            map.put(new Coordinates(min_X, i), new Rock("rock"));
-            map.put(new Coordinates(min_Y, i), new Rock("rock"));
+            map.put(new Coordinates(min_X, i), new Rock_Wall("rock"));
+            map.put(new Coordinates(min_X, i), new Rock_Wall("rock"));
         }
     }
 
@@ -91,7 +94,6 @@ public class Map {
         else {min_y = player.getPlayer_coord_Y() - 10; max_y = player.getPlayer_coord_Y() + 10;}
         for(int i = min_x;i <= max_x;i++){
             for(int j = min_y;j <= max_y;j++){
-                if(i == player.getPlayer_coord_X() && j == player.getPlayer_coord_Y()){}
                 Coordinates c = new Coordinates(i, j);
                 for(Coordinates curr : map.keySet()){
                     if(curr.equals(c)) {

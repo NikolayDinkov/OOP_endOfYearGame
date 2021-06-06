@@ -1,8 +1,5 @@
 package com.elsys;
 
-import java.util.Random;
-import java.util.Set;
-
 //The enemy has only one function and it is live - the living of the monster is to move, when is moved
 //it shoots and if it is shoot Player - player life goes down with 2, he is doing that until it's health goes
 //to zero, next is called death to clear the map from that creature.
@@ -276,7 +273,6 @@ public class Enemy extends Entity implements GameObject{
                         break;
                     }
                 }
-                if (k == 1) continue;
             }
         }
     }
