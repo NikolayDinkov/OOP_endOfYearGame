@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/THE GAME/src/com/elsys/THE_Map.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

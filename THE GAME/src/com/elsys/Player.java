@@ -48,7 +48,7 @@ public class Player extends Entity{
         return 0;
     }
 
-    public void move(Coordinates new_coords, TreeMap<Coordinates,GameObject> map){
+    public TreeMap move(Coordinates new_coords, TreeMap<Coordinates,GameObject> map){
         GameObject obg = map.get(new_coords);
         boolean can_moove = true;
         if (obg instanceof Enemy){
@@ -70,6 +70,7 @@ public class Player extends Entity{
             setPlayer_coord(new_coords);
             map.replace(player_coord, this);
         }
+        return map;
     }
     public void setPlayer_coord(Coordinates player_coord) {
         this.player_coord = player_coord;

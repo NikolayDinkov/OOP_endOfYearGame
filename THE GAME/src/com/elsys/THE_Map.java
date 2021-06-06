@@ -81,36 +81,52 @@ public class THE_Map {
         for(int i = min_Y+1;i <= max_Y-1;i++){
             map.put(new Coordinates(min_X, i), new Rock_Wall());
             map.put(new Coordinates(min_X, i), new Rock_Wall());
-        }
+        }/*
+        Coordinates[] pills_coords = new Coordinates[3];
+        for(int i = 0; i < 3; i++){
+            Coordinates c = randomSpawnLocation(115, 85);
+            int k = 0;
+            for(Coordinates curr : map.keySet()){
+                if(curr.equals(c)){
+                    i--;
+                    k=1;
+                    break;
+                }
+            }
+            if(k == 0){
+                pills_coords[i] = c;
+                map.put(pills_coords[i], new Enemy(this));
+            }
+        }*/
     }
 
     TreeMap<Coordinates, GameObject> getVisibleMap(){
         TreeMap<Coordinates, GameObject> visibleMap = new TreeMap<Coordinates, GameObject>();
         int min_x = 0, min_y = 0, max_x = 99, max_y = 99;
-        if(player.getPlayer_coord_X() < 10){
+        if(player.getPlayer_coord().getX() < 10){
             min_x = 0;
             max_x = 21;
         }
-        else if(player.getPlayer_coord_X() > 78){
+        else if(player.getPlayer_coord().getX() > 78){
             min_x = 78;
             max_x = 99;
         }
         else {
-            min_x = player.getPlayer_coord_X() - 10;
-            max_x = player.getPlayer_coord_X() + 10;
+            min_x = player.getPlayer_coord().getX() - 10;
+            max_x = player.getPlayer_coord().getX() + 10;
         }
 
-        if(player.getPlayer_coord_Y() < 10){
+        if(player.getPlayer_coord().getY() < 10){
             min_y = 0;
             max_y = 21;
         }
-        else if(player.getPlayer_coord_Y() > 78){
+        else if(player.getPlayer_coord().getY() > 78){
             min_y = 78;
             max_y = 99;
         }
         else {
-            min_y = player.getPlayer_coord_Y() - 10;
-            max_y = player.getPlayer_coord_Y() + 10;
+            min_y = player.getPlayer_coord().getY() - 10;
+            max_y = player.getPlayer_coord().getY() + 10;
         }
         for(int i = min_x;i <= max_x;i++){
             for(int j = min_y;j <= max_y;j++){
@@ -156,6 +172,8 @@ public class THE_Map {
                 this.vision[i][j] = '⌂';
             } else if(entry.getValue() instanceof EmptySpace) {
                 this.vision[i][j] = '.';
+            } else if(entry.getValue() instanceof Pills) {
+                this.vision[i][j] = '*';
             }
             j++;
 //                    j++;
@@ -180,32 +198,36 @@ public class THE_Map {
 
     void move_right() {
         if (player.getPlayer_coord_Y() < max_Y){
-            Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() + 1);
-            player.move(new_coords, map);
+            player.setPlayer_coord(new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() + 1));
+            Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y());
+            this.map = player.move(new_coords, map);
         }
         convert();
         printVision();
     }
     void move_left(){
         if (player.getPlayer_coord_Y() > min_Y){
-            Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() - 1);
-            player.move(new_coords, map);
+            player.setPlayer_coord(new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() - 1));
+            Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y());
+            this.map = player.move(new_coords, map);
         }
         convert();
         printVision();
     }
     void move_up(){
         if (player.getPlayer_coord_X() > min_X){
+            player.setPlayer_coord(new Coordinates(player.getPlayer_coord_X() - 1,player.getPlayer_coord_Y()));
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X() - 1,player.getPlayer_coord().getY());
-            player.move(new_coords, map);
+            this.map = player.move(new_coords, map);
         }
         convert();
         printVision();
     }
     void move_down(){
         if (player.getPlayer_coord_Y() < max_X){
+            player.setPlayer_coord(new Coordinates(player.getPlayer_coord_X() + 1,player.getPlayer_coord_Y()));
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X() + 1,player.getPlayer_coord().getY());
-            player.move(new_coords, map);
+            this.map = player.move(new_coords, map);
         }
         convert();
         printVision();
