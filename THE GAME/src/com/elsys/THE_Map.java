@@ -178,7 +178,7 @@ public class THE_Map {
         System.out.print("\n\n");
     }
 
-    void move_up() {
+    void move_right() {
         if (player.getPlayer_coord_Y() < max_Y){
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() + 1);
             player.move(new_coords, map);
@@ -186,23 +186,29 @@ public class THE_Map {
         convert();
         printVision();
     }
-    void move_down(){
+    void move_left(){
         if (player.getPlayer_coord_Y() > min_Y){
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X(),player.getPlayer_coord_Y() - 1);
             player.move(new_coords, map);
         }
+        convert();
+        printVision();
     }
-    void move_left(){
+    void move_up(){
         if (player.getPlayer_coord_X() > min_X){
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X() - 1,player.getPlayer_coord().getY());
             player.move(new_coords, map);
         }
+        convert();
+        printVision();
     }
-    void move_right(){
+    void move_down(){
         if (player.getPlayer_coord_Y() < max_X){
             Coordinates new_coords = new Coordinates(player.getPlayer_coord_X() + 1,player.getPlayer_coord().getY());
             player.move(new_coords, map);
         }
+        convert();
+        printVision();
     }
     void shot_up(){
         brimstone.change_dir(Brimstone.Direction.UP);
