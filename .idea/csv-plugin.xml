@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="/THE GAME/src/com/elsys/Boss.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/THE GAME/src/com/elsys/Coordinates.java">
           <value>
             <Attribute>

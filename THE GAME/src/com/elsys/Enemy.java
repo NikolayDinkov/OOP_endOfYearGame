@@ -15,13 +15,13 @@ public class Enemy extends Entity implements GameObject{
     String last_direction;
     Map the_map;
 
-    public Enemy(){
+    public Enemy(Map map){
         this.max_health = 9;
         this.curr_health = this.max_health;
         this.damage = 2;
         this.length_of_shoot = 2;
-        this.the_map = new Map();
-        spawn();
+        this.the_map = map;
+        //spawn();
     }
 
     private boolean is_it_in_hole(){
@@ -36,34 +36,23 @@ public class Enemy extends Entity implements GameObject{
         return true;
     }
 
-    private void getStartCoords(){
-
-        Random rand = new Random();
-        while(true) {
-            Coordinates supposed_coords = new Coordinates(rand.nextInt(10) + 1, rand.nextInt(10) + 1);
-            if (the_map.map.get(supposed_coords) instanceof EmptySpace) {
-                if(!is_it_in_hole()) {
-                    our_coords = supposed_coords;
-                    break;
-                }
-            }
-        }
-    }
-
-    void spawn(){
-        getStartCoords();
-        the_map.map.replace(our_coords, this);
-    }
-
     private void find_Empty(){
         int clock = -1;
+        int k = 0;
         for (int x = our_coords.getX() - 1; x < our_coords.getX() + 1; x++) {
+            if (k == 1)break;
             for (int y = our_coords.getY() - 1; y < our_coords.getY() + 1; y++) {
+                if (k == 1)break;
                 Coordinates curr = new Coordinates(x, y);
-                if (the_map.map.get(curr) instanceof EmptySpace) {
-                    our_coords = curr;
-                    clock ++;
-                    break;
+                for(Coordinates t : the_map.map.keySet()){
+                    if(t.equals(curr)){
+                        if(the_map.map.get(t) instanceof EmptySpace){
+                            our_coords = t;
+                            clock ++;
+                            k = 1;
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -81,13 +70,7 @@ public class Enemy extends Entity implements GameObject{
     }
 
     private void get_the_Coordinates_of_Player() {
-
-        Set<Coordinates> all_coords = the_map.map.keySet();
-        for (Coordinates curr : all_coords) {
-            if (the_map.map.get(curr) instanceof Player) {
-                enemy = curr;
-            }
-        }
+        this.enemy = this.the_map.player.getPlayer_coord();
     }
 
     private void shoot(){
@@ -115,144 +98,203 @@ public class Enemy extends Entity implements GameObject{
                 collusion.setX(collusion.getX() + this.length_of_shoot);
             }
         }
-        if(the_map.map.get(collusion) instanceof Player){
-            System.out.print("You were hitted by the monster!\n");
-            ((Player) the_map.map.get(collusion)).curr_health = ((Player) the_map.map.get(collusion)).getCurr_health()
-                    - this.damage;
+        for(Coordinates curr : the_map.map.keySet()){
+            if(curr.equals(collusion)){
+                if(the_map.map.get(curr) instanceof Player){
+                    System.out.print("You were hitted by the monster!\n");
+                    ((Player) the_map.map.get(curr)).take_damage(this.damage);
+                }
+            }
         }
+
     }
 
     private void move_path_finding() {
-        while(curr_health > 0){
+        while(curr_health > 0) {
+            int k = 0;
 
             get_the_Coordinates_of_Player();
+            if (this.our_coords.getX() < enemy.getX() && this.our_coords.getY() < enemy.getY()) {
+                for (Coordinates curr : the_map.map.keySet()) {
+                    if (curr.equals(our_coords)) {
+                        the_map.map.replace(curr, new EmptySpace());
+                        our_coords.setX(our_coords.getX() + 1);
+                        our_coords.setY(our_coords.getY() + 1);
 
-            if(this.our_coords.getX() < enemy.getX() && this.our_coords.getY() < enemy.getY()) {
+                        if (!(the_map.map.get(curr) instanceof EmptySpace)) {
+                            find_Empty();
+                        } else {
+                            last_direction = "upper right";
+                        }
 
-                the_map.map.replace(our_coords, new EmptySpace());
-                our_coords.setX(our_coords.getX()+1);
-                our_coords.setY(our_coords.getY()+1);
-
-                if(!(the_map.map.get(our_coords) instanceof EmptySpace)){
-                    find_Empty();
-                }else{
-                    last_direction = "upper right";
+                        the_map.map.replace(curr, this);
+                        shoot();
+                        k = 1;
+                        break;
+                    }
                 }
-
-                the_map.map.replace(our_coords, this);
-                shoot();
-                continue;
+                if (k == 1) continue;
             }
-            if(this.our_coords.getX() < enemy.getX() && this.our_coords.getY() == enemy.getY()) {
+            if (this.our_coords.getX() < enemy.getX() && this.our_coords.getY() == enemy.getY()) {
+                for (Coordinates curr : the_map.map.keySet()) {
+                    if (curr.equals(our_coords)) {
+                        the_map.map.replace(curr, new EmptySpace());
+                        our_coords.setX(our_coords.getX() + 1);
 
-                the_map.map.replace(our_coords, new EmptySpace());
-                our_coords.setX(our_coords.getX()+1);
+                        if (!(the_map.map.get(curr) instanceof EmptySpace)) {
+                            find_Empty();
+                        } else {
+                            last_direction = "right";
+                        }
 
-                if(!(the_map.map.get(our_coords) instanceof EmptySpace)){
-                    find_Empty();
-                }else {
-                    last_direction = "right";
+                        the_map.map.replace(curr, this);
+                        shoot();
+                        k = 1;
+                        break;
+                    }
                 }
-                the_map.map.replace(our_coords, this);
-                shoot();
-                continue;
+                if (k == 1) continue;
             }
-            if(this.our_coords.getX() < enemy.getX() && this.our_coords.getY() > enemy.getY()) {
+            if (this.our_coords.getX() < enemy.getX() && this.our_coords.getY() > enemy.getY()) {
+                for (Coordinates curr : the_map.map.keySet()) {
+                    if (curr.equals(our_coords)) {
+                        the_map.map.replace(curr, new EmptySpace());
+                        our_coords.setX(our_coords.getX() + 1);
+                        our_coords.setY(our_coords.getY() - 1);
 
-                the_map.map.replace(our_coords, new EmptySpace());
-                our_coords.setX(our_coords.getX()+1);
-                our_coords.setY(our_coords.getY()-1);
+                        if (!(the_map.map.get(curr) instanceof EmptySpace)) {
+                            find_Empty();
+                        } else {
+                            last_direction = "bottom right";
+                        }
 
-                if(!(the_map.map.get(our_coords) instanceof EmptySpace)){
-                    find_Empty();
-                }else{
-                    last_direction = "bottom right";
+                        the_map.map.replace(curr, this);
+                        shoot();
+                        k = 1;
+                        break;
+                    }
                 }
-
-                the_map.map.replace(our_coords, this);
-                shoot();
-                continue;
+                if (k == 1) continue;
             }
-            if(this.our_coords.getX() == enemy.getX() && this.our_coords.getY() > enemy.getY()) {
-                the_map.map.replace(our_coords, new EmptySpace());
-                our_coords.setY(our_coords.getY()-1);
+            if (this.our_coords.getX() == enemy.getX() && this.our_coords.getY() > enemy.getY()) {
+                for (Coordinates curr : the_map.map.keySet()) {
+                    if (curr.equals(our_coords)) {
+                        the_map.map.replace(curr, new EmptySpace());
+                        our_coords.setY(our_coords.getY() - 1);
 
-                if(!(the_map.map.get(our_coords) instanceof EmptySpace)){
-                    find_Empty();
-                }else{
-                    last_direction = "down";
+                        if (!(the_map.map.get(curr) instanceof EmptySpace)) {
+                            find_Empty();
+                        } else {
+                            last_direction = "down";
+                        }
+
+                        the_map.map.replace(curr, this);
+                        shoot();
+                        k = 1;
+                        break;
+                    }
                 }
-
-                the_map.map.replace(our_coords, this);
-                shoot();
-                continue;
+                if (k == 1) continue;
             }
-            if(this.our_coords.getX() > enemy.getX() && this.our_coords.getY() > enemy.getY()) {
+            if (this.our_coords.getX() > enemy.getX() && this.our_coords.getY() > enemy.getY()) {
+                for (Coordinates curr : the_map.map.keySet()) {
+                    if (curr.equals(our_coords)) {
+                        the_map.map.replace(curr, new EmptySpace());
+                        our_coords.setX(our_coords.getX() - 1);
+                        our_coords.setY(our_coords.getY() - 1);
 
-                the_map.map.replace(our_coords, new EmptySpace());
-                our_coords.setX(our_coords.getX()-1);
-                our_coords.setY(our_coords.getY()-1);
+                        if (!(the_map.map.get(curr) instanceof EmptySpace)) {
+                            find_Empty();
+                        } else {
+                            last_direction = "bottom left";
+                        }
 
-                if(!(the_map.map.get(our_coords) instanceof EmptySpace)){
-                    find_Empty();
-                }else{
-                    last_direction = "bottom left";
+                        the_map.map.replace(curr, this);
+                        shoot();
+                        k = 1;
+                        break;
+                    }
                 }
-
-                the_map.map.replace(our_coords, this);
-                shoot();
-                continue;
+                if (k == 1) continue;
             }
-            if(this.our_coords.getX() > enemy.getX() && this.our_coords.getY() == enemy.getY()) {
-                the_map.map.replace(our_coords, new EmptySpace());
-                our_coords.setX(our_coords.getX()-1);
+            if (this.our_coords.getX() > enemy.getX() && this.our_coords.getY() == enemy.getY()) {
+                for (Coordinates curr : the_map.map.keySet()) {
+                    if (curr.equals(our_coords)) {
+                        the_map.map.replace(curr, new EmptySpace());
+                        our_coords.setX(our_coords.getX() - 1);
 
-                if(!(the_map.map.get(our_coords) instanceof EmptySpace)){
-                    find_Empty();
-                }else{
-                    last_direction = "left";
+                        if (!(the_map.map.get(curr) instanceof EmptySpace)) {
+                            find_Empty();
+                        } else {
+                            last_direction = "left";
+                        }
+
+                        the_map.map.replace(curr, this);
+                        shoot();
+                        k = 1;
+                        break;
+                    }
                 }
-
-                the_map.map.replace(our_coords, this);
-                shoot();
-                continue;
+                if (k == 1) continue;
             }
-            if(this.our_coords.getX() > enemy.getX() && this.our_coords.getY() < enemy.getY()) {
-                the_map.map.replace(our_coords, new EmptySpace());
-                our_coords.setX(our_coords.getX()-1);
-                our_coords.setY(our_coords.getY()+1);
+            if (this.our_coords.getX() > enemy.getX() && this.our_coords.getY() < enemy.getY()) {
+                for (Coordinates curr : the_map.map.keySet()) {
+                    if (curr.equals(our_coords)) {
+                        the_map.map.replace(curr, new EmptySpace());
+                        our_coords.setX(our_coords.getX() - 1);
+                        our_coords.setY(our_coords.getY() + 1);
 
-                if(!(the_map.map.get(our_coords) instanceof EmptySpace)){
-                    find_Empty();
-                }else{
-                    last_direction = "upper left";
+                        if (!(the_map.map.get(curr) instanceof EmptySpace)) {
+                            find_Empty();
+                        } else {
+                            last_direction = "upper left";
+                        }
+
+                        the_map.map.replace(curr, this);
+                        shoot();
+                        k = 1;
+                        break;
+                    }
                 }
-
-                the_map.map.replace(our_coords, this);
-                shoot();
-                continue;
+                if (k == 1) continue;
             }
-            if(this.our_coords.getX() == enemy.getX() && this.our_coords.getY() < enemy.getY()) {
-                the_map.map.replace(our_coords, new EmptySpace());
-                our_coords.setY(our_coords.getY()+1);
+            if (this.our_coords.getX() == enemy.getX() && this.our_coords.getY() < enemy.getY()) {
+                for (Coordinates curr : the_map.map.keySet()) {
+                    if (curr.equals(our_coords)) {
+                        the_map.map.replace(curr, new EmptySpace());
+                        our_coords.setY(our_coords.getY() + 1);
 
-                if(!(the_map.map.get(our_coords) instanceof EmptySpace)){
-                    find_Empty();
-                }else{
-                    last_direction = "upper";
+                        if (!(the_map.map.get(curr) instanceof EmptySpace)) {
+                            find_Empty();
+                        } else {
+                            last_direction = "upper";
+                        }
+
+                        the_map.map.replace(curr, this);
+                        shoot();
+                        k = 1;
+                        break;
+                    }
                 }
-
-                the_map.map.replace(our_coords, this);
-                shoot();
+                if (k == 1) continue;
             }
         }
     }
     private void death(){
-        the_map.map.replace(our_coords, new EmptySpace());
+        for(Coordinates curr : the_map.map.keySet()){
+            if(curr.equals(our_coords)){
+                the_map.map.replace(curr, new Key("Key"));
+                break;
+            }
+        }
     }
 
     public void live(){
         move_path_finding();
         death();
+    }
+    @Override
+    public String toString(){
+        return "Enemy";
     }
 }

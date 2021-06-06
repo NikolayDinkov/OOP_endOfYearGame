@@ -4,12 +4,11 @@ public class Boss extends Enemy implements GameObject{
 
     EndHole end;
 
-    public Boss() {
-
-       this.damage = 5;
+    public Boss(Map map) {
+        super(map);
+        this.damage = 5;
         this.max_health = 15;
         this.curr_health = this.max_health;
-        super.spawn();
     }
 
 

@@ -114,4 +114,8 @@ public class Player extends Entity{
     public int getPlayer_coord_Y(){
         return player_coord.getY();
     }
+    @Override
+    public String toString(){
+        return "Player";
+    }
 }
