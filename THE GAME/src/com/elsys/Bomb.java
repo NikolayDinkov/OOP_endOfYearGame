@@ -13,7 +13,7 @@ public class Bomb extends Item implements Usable{
     }
 
     @Override
-    public void use(Entity player, Map map) {
+    public void use(Entity player, THE_Map map) {
         dropped_at_X = ((Player) player).getPlayer_coord().getX();
         dropped_at_Y = ((Player) player).getPlayer_coord().getY();
 

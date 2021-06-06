@@ -4,7 +4,7 @@ public class Boss extends Enemy implements GameObject{
 
     EndHole end;
 
-    public Boss(Map map) {
+    public Boss(THE_Map map) {
         super(map);
         this.damage = 5;
         this.max_health = 15;

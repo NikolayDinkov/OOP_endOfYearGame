@@ -96,7 +96,7 @@ public class Player extends Entity{
             keys++;
         }
     }
-    public void use_bomb(Map map){
+    public void use_bomb(THE_Map map){
         if(this.bombs > 0){
             this.bomb.use(this,map);
             this.bombs--;

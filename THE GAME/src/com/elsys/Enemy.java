@@ -10,9 +10,9 @@ public class Enemy extends Entity implements GameObject{
     Coordinates our_coords;
     int length_of_shoot;
     String last_direction;
-    Map the_map;
+    THE_Map the_map;
 
-    public Enemy(Map map){
+    public Enemy(THE_Map map){
         this.max_health = 9;
         this.curr_health = this.max_health;
         this.damage = 2;

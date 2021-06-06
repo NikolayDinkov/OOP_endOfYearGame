@@ -4,8 +4,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 class MKeyListener extends KeyAdapter {
-    Map map;
-    MKeyListener(Map m){
+    THE_Map map;
+    MKeyListener(THE_Map m){
         this.map = m;
     }
     @Override
