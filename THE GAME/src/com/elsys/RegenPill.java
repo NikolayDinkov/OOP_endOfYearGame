@@ -1,6 +1,6 @@
 package com.elsys;
 
-public class RegenPill extends Pills implements Usable{
+public class RegenPill extends Pills {
     int regen;
 
     RegenPill(int power, int bad_effect) {
@@ -9,7 +9,7 @@ public class RegenPill extends Pills implements Usable{
     }
 
     @Override
-    public void use(Entity player, THE_Map map) {
+    public void consume(Player player) {
 
     }
 }

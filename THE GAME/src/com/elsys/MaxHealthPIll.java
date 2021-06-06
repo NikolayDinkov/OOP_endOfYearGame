@@ -1,6 +1,6 @@
 package com.elsys;
 
-public class MaxHealthPIll extends Pills implements Usable{
+public class MaxHealthPIll extends Pills {
     int bonus_health;
 
     MaxHealthPIll(int power, int bad_effect) {
@@ -8,8 +8,9 @@ public class MaxHealthPIll extends Pills implements Usable{
         bonus_health = ((3 * power) - bad_effect);
     }
 
+
     @Override
-    public void use(Entity player, THE_Map map) {
+    public void consume(Player player) {
 
     }
 }

@@ -1,6 +1,6 @@
 package com.elsys;
 
-public abstract class Pills extends Item{
+public abstract class Pills extends Item implements Consumable{
     int power;
     int bad_effect;
 

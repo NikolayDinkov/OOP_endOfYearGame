@@ -95,6 +95,7 @@ public class Player extends Entity{
         if (item instanceof Key){
             keys++;
         }
+        
     }
     public void use_bomb(THE_Map map){
         if(this.bombs > 0){
