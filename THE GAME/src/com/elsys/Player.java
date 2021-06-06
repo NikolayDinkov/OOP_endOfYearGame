@@ -1,12 +1,16 @@
 package com.elsys;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class Player extends Entity{
 
     Item inventory;
     Bomb bomb;
+
+    Brimstone brimstone;
+
     private Coordinates player_coord;
     private int bombs = 1;
     private int keys = 0;
@@ -19,7 +23,8 @@ public class Player extends Entity{
         this.curr_range = 2;
         this.min_range = 1;
         this.player_coord = player_coord;
-        this.bomb = new Bomb(5);
+        this.bomb = new Bomb( 5);
+        this.brimstone = new Brimstone(getPlayer_coord(), getDamage(),getRange());
     }
 
     int regen(int toBeRegenerated){//regen serten amount of health
@@ -46,6 +51,11 @@ public class Player extends Entity{
         }
         this.curr_range--;
         return 0;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+        this.brimstone.setDamage(damage);
     }
 
     public void move(Coordinates new_coords, TreeMap<Coordinates,GameObject> map){
@@ -92,10 +102,18 @@ public class Player extends Entity{
         if(item instanceof Bomb){
             bombs++;
         }
-        if (item instanceof Key){
+        else if(item instanceof Key){
             keys++;
         }
-
+        else if (item instanceof PowerPill){
+            ((PowerPill) item).consume(this);
+        }
+        else if(item instanceof RegenPill){
+            ((RegenPill) item).consume(this);
+        }
+        else if(item instanceof MaxHealthPIll){
+            ((MaxHealthPIll) item).consume(this);
+        }
     }
     public void use_bomb(THE_Map map){
         if(this.bombs > 0){
