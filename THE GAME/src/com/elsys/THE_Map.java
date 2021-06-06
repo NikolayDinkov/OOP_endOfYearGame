@@ -136,31 +136,36 @@ public class THE_Map {
         for(Map.Entry<Coordinates, GameObject> entry : map_vision.entrySet()){
 ////            System.out.printf("x: %d, y: %d\n", entry.getKey().getX(), entry.getKey().getY());
 //            System.out.println(entry.getKey().getX() + " " + entry.getKey().getY());
-            while(i < 21){
-                while(j < 21){
-                    System.out.println(entry.getValue());
-                    if(entry.getValue() instanceof Rock) {
-                        this.vision[i][j] = '∎';
-                    } else if (entry.getValue() instanceof Player) {
-                        this.vision[i][j] = 'p';
-                    } else if (entry.getValue() instanceof Boss) {
-                        this.vision[i][j] = 'b';
-                    } else if(entry.getValue() instanceof Enemy) {
-                        this.vision[i][j] = 'e';
-                    } else if(entry.getValue() instanceof Key) {
-                        this.vision[i][j] = 'k';
-                    } else if(entry.getValue() instanceof EndHole) {
-                        this.vision[i][j] = '⊙';
-                    } else if(entry.getValue() instanceof Rock_Wall) {
-                        this.vision[i][j] = '⌂';
-                    } else if(entry.getValue() instanceof EmptySpace) {
-                        this.vision[i][j] = '.';
-                    }
-                    j++;
-                }
-                i++;
+//            while(i < 21){
+//                while(j < 21){
+            if(j == 21){
                 j = 0;
+                i++;
             }
+            System.out.println(entry.getValue());
+            if(entry.getValue() instanceof Rock) {
+                this.vision[i][j] = '∎';
+            } else if (entry.getValue() instanceof Player) {
+                this.vision[i][j] = 'p';
+            } else if (entry.getValue() instanceof Boss) {
+                this.vision[i][j] = 'b';
+            } else if(entry.getValue() instanceof Enemy) {
+                this.vision[i][j] = 'e';
+            } else if(entry.getValue() instanceof Key) {
+                this.vision[i][j] = 'k';
+            } else if(entry.getValue() instanceof EndHole) {
+                this.vision[i][j] = '⊙';
+            } else if(entry.getValue() instanceof Rock_Wall) {
+                this.vision[i][j] = '⌂';
+            } else if(entry.getValue() instanceof EmptySpace) {
+                this.vision[i][j] = '.';
+            }
+            j++;
+//                    j++;
+//                }
+//                i++;
+//                j = 0;
+//            }
         }
     }
 
